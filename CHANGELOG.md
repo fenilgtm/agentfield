@@ -6,6 +6,61 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 <!-- changelog:entries -->
 
+## [0.1.85-rc.3] - 2026-05-13
+
+
+### Chores
+
+- Chore(deps): bump next (#571)
+
+Bumps the npm_and_yarn group with 1 update in the /examples/python_agent_nodes/rag_evaluation/ui directory: [next](https://github.com/vercel/next.js).
+
+
+Updates `next` from 15.5.15 to 15.5.18
+- [Release notes](https://github.com/vercel/next.js/releases)
+- [Changelog](https://github.com/vercel/next.js/blob/canary/release.js)
+- [Commits](https://github.com/vercel/next.js/compare/v15.5.15...v15.5.18)
+
+---
+updated-dependencies:
+- dependency-name: next
+  dependency-version: 15.5.18
+  dependency-type: direct:production
+  dependency-group: npm_and_yarn
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Abir Abbas <abirabbas1998@gmail.com> (93fe671)
+
+
+
+### Fixed
+
+- Fix(control-plane): add default-deny mode to tag policy middleware (#573)
+
+When no access policy matches a (caller_tags, target_tags, function)
+tuple the middleware previously allowed the request through. Operators
+that intend to lock down resources had no way to detect or block these
+unmatched requests without auditing every possible caller-tag
+combination.
+
+Adds an opt-in DefaultDeny flag on AuthorizationConfig (YAML:
+features.did.authorization.default_deny, env:
+AGENTFIELD_AUTHORIZATION_DEFAULT_DENY). Default false preserves
+existing behavior. When true, an unmatched request returns 403 with
+an opaque error body; the unmatched tuple is logged at DEBUG in both
+modes so operators can identify coverage gaps without leaking tag
+taxonomy to denied callers.
+
+The new branch lives inside the existing policyService != nil guard,
+so deployments without a policy service configured are unaffected and
+the flag is a no-op for them.
+
+Fixes #426
+
+Co-authored-by: Claude <noreply@anthropic.com> (c778ad1)
+
 ## [0.1.85-rc.2] - 2026-05-13
 
 
